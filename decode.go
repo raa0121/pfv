@@ -29,10 +29,10 @@ func Decode(s string) *Pfv {
 			pfv.Header = v
 		}
 		if strings.HasPrefix(v, "root-name/") {
-			pfv.RootName = strings.Trim(v, "root-name/")
+			pfv.RootName = strings.TrimPrefix(v, "root-name/")
 		}
 		if strings.HasPrefix(v, "faview-mode/") {
-			i, err := strconv.Atoi(strings.Trim(v, "faview-mode/"))
+			i, err := strconv.Atoi(strings.TrimPrefix(v, "faview-mode/"))
 			if err != nil {
 				panic(err)
 			}
@@ -40,7 +40,7 @@ func Decode(s string) *Pfv {
 		}
 		if strings.HasPrefix(v, `//`) {
 			item := &Item{
-				Name: strings.Trim(v, `//`),
+				Name: strings.TrimPrefix(v, `//`),
 			}
 			for j, vv := range data[i+1:] {
 				if vv == "" {
